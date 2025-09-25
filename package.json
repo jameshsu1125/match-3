@@ -16,6 +16,7 @@
     "lesca-click": "^5.0.0",
     "lesca-enterframe": "^2.0.0",
     "lesca-fetcher": "^2.0.2",
+    "lesca-object-tweener": "^3.0.0",
     "lesca-react-onload": "^2.0.10",
     "lesca-use-tween": "^4.0.1",
     "react": "^19.1.1",

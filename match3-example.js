@@ -483,7 +483,7 @@ window.onload = function () {
 
   // Start a new game
   function newGame() {
-    // Reset score
+    // Reset scoreshift
     score = 0;
 
     // Set the gamestate to ready
