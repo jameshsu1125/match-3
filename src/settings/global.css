@@ -1,0 +1,13 @@
+@import url('../../tailwind.config.css');
+
+body {
+  margin: 0;
+
+  text-size-adjust: none;
+  overscroll-behavior: none;
+  @apply bg-backgroundColor text-textColor;
+}
+
+.App {
+  @apply absolute h-full w-full;
+}

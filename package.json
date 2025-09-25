@@ -1,0 +1,51 @@
+{
+  "name": "template-vite-react",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "rm": "rm -rf node_modules/ dist/ package-lock.json",
+    "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "deploy": "touch dist/.nojekyll && gh-pages -d dist"
+  },
+  "dependencies": {
+    "@faker-js/faker": "^10.0.0",
+    "lesca-click": "^5.0.0",
+    "lesca-fetcher": "^2.0.2",
+    "lesca-react-onload": "^2.0.10",
+    "lesca-use-tween": "^4.0.1",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "react-loading": "^2.0.3",
+    "react-router-dom": "^7.9.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.1.13",
+    "@types/react": "^19.1.13",
+    "@types/react-dom": "^19.1.9",
+    "@typescript-eslint/eslint-plugin": "^8.44.1",
+    "@typescript-eslint/parser": "^8.44.1",
+    "@vitejs/plugin-react": "^5.0.3",
+    "autoprefixer": "^10.4.21",
+    "devcert": "^1.2.2",
+    "eslint": "^9.36.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.21",
+    "gh-pages": "^6.3.0",
+    "less": "4.3.0",
+    "msw": "2.11.3",
+    "postcss": "^8.5.6",
+    "prettier-plugin-tailwindcss": "^0.6.14",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.13",
+    "typescript": "^5.9.2",
+    "vite": "^7.1.7",
+    "vite-plugin-html": "^3.2.2"
+  },
+  "msw": {
+    "workerDirectory": "public"
+  }
+}
