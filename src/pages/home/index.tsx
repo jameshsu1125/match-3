@@ -1,22 +1,30 @@
-import Button from '@/components/button';
-import useTodos from '@/hooks/useTodos';
-import { IReactProps } from '@/settings/type';
-import { memo, useState } from 'react';
+import { memo, useEffect, useRef, useState } from 'react';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
+import Match3 from './match3';
 
-const Home = memo(({ children }: IReactProps) => {
+const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
-  const [todos, getTodos] = useTodos();
+
+  const canvasRef = useRef<HTMLCanvasElement | null>(null);
+
+  useEffect(() => {
+    if (!canvasRef.current) return;
+    new Match3({ canvas: canvasRef.current });
+  }, []);
 
   return (
     <div className='Home'>
       <HomeContext.Provider value={[state, setState]}>
-        <h1 className='text-2xl'>{children}</h1>
-        <Button onClick={getTodos}>
-          <Button.regular>Fetch</Button.regular>
-        </Button>
-        <p className='text-center'>{JSON.stringify(todos)}</p>
+        <div className='h-96 w-96 rounded bg-white shadow-md'>
+          <canvas
+            ref={canvasRef}
+            id='viewport'
+            className='h-full w-full'
+            width={384}
+            height={384}
+          />
+        </div>
       </HomeContext.Provider>
     </div>
   );

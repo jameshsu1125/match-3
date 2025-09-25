@@ -14,13 +14,14 @@
   "dependencies": {
     "@faker-js/faker": "^10.0.0",
     "lesca-click": "^5.0.0",
+    "lesca-enterframe": "^2.0.0",
     "lesca-fetcher": "^2.0.2",
     "lesca-react-onload": "^2.0.10",
     "lesca-use-tween": "^4.0.1",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-loading": "^2.0.3",
-    "react-router-dom": "^7.9.1"
+    "react-router-dom": "^7.9.2"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.13",
