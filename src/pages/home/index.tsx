@@ -16,13 +16,13 @@ const Home = memo(() => {
   return (
     <div className='Home'>
       <HomeContext.Provider value={[state, setState]}>
-        <div className='h-[480px] w-[640px] rounded bg-white shadow-md'>
+        <div className='h-96 w-96 rounded bg-white shadow-md'>
           <canvas
             ref={canvasRef}
             id='viewport'
             className='h-full w-full'
-            width={640}
-            height={480}
+            width={384}
+            height={384}
           />
         </div>
       </HomeContext.Provider>

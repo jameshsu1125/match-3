@@ -88,6 +88,10 @@ export default class Match3Game {
     this.canvas.addEventListener('mouseup', this.onMouseUp.bind(this));
     this.canvas.addEventListener('mouseout', this.onMouseOut.bind(this));
 
+    const { width, height } = this.canvas;
+    this.config.tile.width = width / this.config.columns;
+    this.config.tile.height = height / this.config.rows;
+
     // Initialize the two-dimensional tile array
     for (let i = 0; i < this.config.columns; i++) {
       this.config.tile.data[i] = [];
