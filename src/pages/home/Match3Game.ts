@@ -1,75 +1,13 @@
-// ------------------------------------------------------------------------
-// Match-3 Game TypeScript Class Version
-// Based on Rembound.com's HTML5 Canvas Match-3 Tutorial
-// Converted to TypeScript with class-based architecture
-// ------------------------------------------------------------------------
-
-// 類型定義
-interface Tile {
-  type: number;
-  shift: number;
-}
-
-interface Position {
-  x: number;
-  y: number;
-}
-
-interface TileCoordinate {
-  tilex: number;
-  tiley: number;
-}
-
-interface MouseTileResult {
-  valid: boolean;
-  x: number;
-  y: number;
-}
-
-interface SelectedTile {
-  selected: boolean;
-  column: number;
-  row: number;
-}
-
-interface Level {
-  x: number;
-  y: number;
-  columns: number;
-  rows: number;
-  tilewidth: number;
-  tileheight: number;
-  tiles: Tile[][];
-  selectedtile: SelectedTile;
-}
-
-interface Cluster {
-  column: number;
-  row: number;
-  length: number;
-  horizontal: boolean;
-}
-
-interface Move {
-  column1: number;
-  row1: number;
-  column2: number;
-  row2: number;
-}
-
-interface Button {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  text: string;
-}
-
-enum GameState {
-  INIT = 0,
-  READY = 1,
-  RESOLVE = 2,
-}
+import {
+  Button,
+  Cluster,
+  GameState,
+  Level,
+  MouseTileResult,
+  Move,
+  Position,
+  TileCoordinate,
+} from './type';
 
 export default class Match3Game {
   private canvas: HTMLCanvasElement;
@@ -657,6 +595,7 @@ export default class Match3Game {
   private removeClusters(): void {
     this.loopClusters((_index, column, row, _cluster) => {
       this.level.tiles[column][row].type = -1;
+      console.log(indexedDB, _cluster);
     });
 
     for (let i = 0; i < this.level.columns; i++) {
@@ -787,11 +726,11 @@ export default class Match3Game {
     }
   }
 
-  private onMouseUp(_e: MouseEvent): void {
+  private onMouseUp(): void {
     this.drag = false;
   }
 
-  private onMouseOut(_e: MouseEvent): void {
+  private onMouseOut(): void {
     this.drag = false;
   }
 

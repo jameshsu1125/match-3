@@ -5,16 +5,19 @@
 ## 主要改進
 
 ### 🎯 TypeScript 轉換
+
 - 完整的類型定義和介面
 - 強型別檢查
 - 更好的程式碼提示和錯誤檢測
 
 ### 🏗️ 類別架構
+
 - 將所有功能封裝在 `Match3Game` 類別中
 - 清晰的公開和私有方法分離
 - 更好的程式碼組織和維護性
 
 ### 📝 類型安全
+
 - 定義了完整的介面：`Tile`, `Position`, `Cluster`, `Move` 等
 - 使用 TypeScript enum 管理遊戲狀態
 - 所有參數和返回值都有明確的類型
@@ -63,21 +66,25 @@ game.toggleAIBot();
 ## 開發和運行
 
 ### 安裝依賴
+
 ```bash
 npm install
 ```
 
 ### 開發模式
+
 ```bash
 npm run match3:dev
 ```
 
 ### 建置生產版本
+
 ```bash
 npm run match3:build
 ```
 
 ### 預覽建置結果
+
 ```bash
 npm run match3:preview
 ```
@@ -95,17 +102,20 @@ npm run match3:preview
 ## 技術特點
 
 ### 類別設計
+
 - 使用 ES6+ 類別語法
 - 私有方法和屬性的清晰分離
 - 事件處理器正確綁定 `this` 上下文
 
 ### TypeScript 特性
+
 - 嚴格的類型檢查
 - 介面定義所有資料結構
 - 枚舉管理遊戲狀態
 - 完整的類型安全
 
 ### 效能優化
+
 - 使用 `requestAnimationFrame` 進行流暢動畫
 - 有效的碰撞偵測和座標計算
 - 優化的叢集搜尋演算法
