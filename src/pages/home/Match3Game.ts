@@ -62,9 +62,9 @@ export default class Match3Game {
   private currentMove: Move = { column1: 0, row1: 0, column2: 0, row2: 0 };
 
   // Features
-  private showmoves: boolean = false;
-  private aibot: boolean = false;
-  private gameover: boolean = false;
+  private showMoves: boolean = false;
+  private aiBot: boolean = false;
+  private gameOver: boolean = false;
 
   // GUI buttons
   private buttons: Button[] = [
@@ -126,11 +126,11 @@ export default class Match3Game {
     if (this.state.status === GameState.READY) {
       // Game is ready for player input
       if (this.moves.length <= 0) {
-        this.gameover = true;
+        this.gameOver = true;
       }
 
       // AI bot logic
-      if (this.aibot) {
+      if (this.aiBot) {
         this.state.animation.time += dt;
         if (this.state.animation.time > this.state.animation.total) {
           this.findMoves();
@@ -224,8 +224,8 @@ export default class Match3Game {
   }
 
   private drawCenterText(text: string, x: number, y: number, width: number): void {
-    const textdim = this.context.measureText(text);
-    this.context.fillText(text, x + (width - textdim.width) / 2, y);
+    const textDim = this.context.measureText(text);
+    this.context.fillText(text, x + (width - textDim.width) / 2, y);
   }
 
   private render(): void {
@@ -235,54 +235,31 @@ export default class Match3Game {
     this.drawCenterText('Score:', 30, this.config.y + 40, 150);
     this.drawCenterText(this.score.toString(), 30, this.config.y + 70, 150);
 
-    this.drawButtons();
-
     // Draw level background
-    const levelwidth = this.config.columns * this.config.tile.width;
-    const levelheight = this.config.rows * this.config.tile.height;
+    const levelWidth = this.config.columns * this.config.tile.width;
+    const levelHeight = this.config.rows * this.config.tile.height;
     this.context.fillStyle = '#000000';
-    this.context.fillRect(this.config.x - 4, this.config.y - 4, levelwidth + 8, levelheight + 8);
+    this.context.fillRect(this.config.x - 4, this.config.y - 4, levelWidth + 8, levelHeight + 8);
 
     this.renderTiles();
     this.renderClusters();
 
-    if (this.showmoves && this.clusters.length <= 0 && this.state.status === GameState.READY) {
+    if (this.showMoves && this.clusters.length <= 0 && this.state.status === GameState.READY) {
       this.renderMoves();
     }
 
     // Game Over overlay
-    if (this.gameover) {
+    if (this.gameOver) {
       this.context.fillStyle = 'rgba(0, 0, 0, 0.8)';
-      this.context.fillRect(this.config.x, this.config.y, levelwidth, levelheight);
+      this.context.fillRect(this.config.x, this.config.y, levelWidth, levelHeight);
 
       this.context.fillStyle = '#ffffff';
       this.context.font = '24px Verdana';
       this.drawCenterText(
         'Game Over!',
         this.config.x,
-        this.config.y + levelheight / 2 + 10,
-        levelwidth,
-      );
-    }
-  }
-
-  private drawButtons(): void {
-    for (let i = 0; i < this.buttons.length; i++) {
-      this.context.fillStyle = '#000000';
-      this.context.fillRect(
-        this.buttons[i].x,
-        this.buttons[i].y,
-        this.buttons[i].width,
-        this.buttons[i].height,
-      );
-
-      this.context.fillStyle = '#ffffff';
-      this.context.font = '18px Verdana';
-      const textdim = this.context.measureText(this.buttons[i].text);
-      this.context.fillText(
-        this.buttons[i].text,
-        this.buttons[i].x + (this.buttons[i].width - textdim.width) / 2,
-        this.buttons[i].y + 30,
+        this.config.y + levelHeight / 2 + 10,
+        levelWidth,
       );
     }
   }
@@ -418,7 +395,7 @@ export default class Match3Game {
   public newGame(): void {
     this.score = 0;
     this.state.status = GameState.READY;
-    this.gameover = false;
+    this.gameOver = false;
     this.createLevel();
     this.findMoves();
     this.findClusters();
@@ -691,26 +668,6 @@ export default class Match3Game {
 
       this.state.isDrag = true;
     }
-
-    // Check button clicks
-    for (let i = 0; i < this.buttons.length; i++) {
-      if (
-        pos.x >= this.buttons[i].x &&
-        pos.x < this.buttons[i].x + this.buttons[i].width &&
-        pos.y >= this.buttons[i].y &&
-        pos.y < this.buttons[i].y + this.buttons[i].height
-      ) {
-        if (i === 0) {
-          this.newGame();
-        } else if (i === 1) {
-          this.showmoves = !this.showmoves;
-          this.buttons[i].text = (this.showmoves ? 'Hide' : 'Show') + ' Moves';
-        } else if (i === 2) {
-          this.aibot = !this.aibot;
-          this.buttons[i].text = (this.aibot ? 'Disable' : 'Enable') + ' AI Bot';
-        }
-      }
-    }
   }
 
   private onMouseUp(): void {
@@ -735,16 +692,6 @@ export default class Match3Game {
   }
 
   public isGameOver(): boolean {
-    return this.gameover;
-  }
-
-  public toggleShowMoves(): void {
-    this.showmoves = !this.showmoves;
-    this.buttons[1].text = (this.showmoves ? 'Hide' : 'Show') + ' Moves';
-  }
-
-  public toggleAIBot(): void {
-    this.aibot = !this.aibot;
-    this.buttons[2].text = (this.aibot ? 'Disable' : 'Enable') + ' AI Bot';
+    return this.gameOver;
   }
 }
