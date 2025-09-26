@@ -1,7 +1,7 @@
 import { memo, useEffect, useRef, useState } from 'react';
 import { HomeContext, HomeState, THomeState } from './config';
 import './index.less';
-import Match3 from './match3';
+import Match3Game from './Match3Game';
 
 const Home = memo(() => {
   const [state, setState] = useState<THomeState>(HomeState);
@@ -10,7 +10,7 @@ const Home = memo(() => {
 
   useEffect(() => {
     if (!canvasRef.current) return;
-    new Match3({ canvas: canvasRef.current });
+    new Match3Game('viewport');
   }, []);
 
   return (

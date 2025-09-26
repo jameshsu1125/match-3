@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Match-3 Game - TypeScript Class Version</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        
+        #game-container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        
+        canvas {
+            border: 2px solid #333;
+            display: block;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .info {
+            margin-top: 20px;
+            color: #666;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <h1>Match-3 Game</h1>
+        <p>TypeScript Class Version</p>
+        <canvas id="viewport" width="640" height="480"></canvas>
+        <div class="info">
+            <p>拖拽相鄰的方塊來交換位置，創造三個或更多相同顏色的連線！</p>
+            <p>使用左側的按鈕來控制遊戲功能</p>
+        </div>
+    </div>
+    
+    <script type="module" src="./src/index.ts"></script>
+</body>
+</html>

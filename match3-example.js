@@ -121,6 +121,7 @@ window.onload = function () {
     window.requestAnimationFrame(main);
 
     // Update and render the game
+    // TODO=>
     update(tframe);
     render();
   }
@@ -128,6 +129,7 @@ window.onload = function () {
   // Update the game state
   function update(tframe) {
     var dt = (tframe - lastframe) / 1000;
+
     lastframe = tframe;
 
     // Update the fps counter
@@ -166,9 +168,13 @@ window.onload = function () {
       animationtime += dt;
 
       if (animationstate == 0) {
+        console.log('a');
+
         // Clusters need to be found and removed
         if (animationtime > animationtimetotal) {
           // Find clusters
+          console.log('b');
+
           findClusters();
 
           if (clusters.length > 0) {
