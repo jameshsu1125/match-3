@@ -277,12 +277,12 @@ export default class Match3Game {
 
         if (this.config.tile.data[i][j].type >= 0) {
           const col = this.tileColors[this.config.tile.data[i][j].type];
-          this.drawTile(coord.tilex, coord.tiley, col[0], col[1], col[2]);
+          this.drawTile(coord.x, coord.y, col[0], col[1], col[2]);
         }
 
         if (this.config.selected.selected) {
           if (this.config.selected.column === i && this.config.selected.row === j) {
-            this.drawTile(coord.tilex, coord.tiley, 255, 0, 0);
+            this.drawTile(coord.x, coord.y, 255, 0, 0);
           }
         }
       }
@@ -293,15 +293,15 @@ export default class Match3Game {
       this.state.status === GameState.RESOLVE &&
       (this.state.animation.state === 2 || this.state.animation.state === 3)
     ) {
-      const shiftx = this.currentMove.column2 - this.currentMove.column1;
-      const shifty = this.currentMove.row2 - this.currentMove.row1;
+      const shiftX = this.currentMove.column2 - this.currentMove.column1;
+      const shiftY = this.currentMove.row2 - this.currentMove.row1;
 
       const coord1 = this.getTileCoordinate(this.currentMove.column1, this.currentMove.row1, 0, 0);
       const coord1shift = this.getTileCoordinate(
         this.currentMove.column1,
         this.currentMove.row1,
-        (this.state.animation.time / this.state.animation.total) * shiftx,
-        (this.state.animation.time / this.state.animation.total) * shifty,
+        (this.state.animation.time / this.state.animation.total) * shiftX,
+        (this.state.animation.time / this.state.animation.total) * shiftY,
       );
       const col1 =
         this.tileColors[
@@ -312,23 +312,23 @@ export default class Match3Game {
       const coord2shift = this.getTileCoordinate(
         this.currentMove.column2,
         this.currentMove.row2,
-        (this.state.animation.time / this.state.animation.total) * -shiftx,
-        (this.state.animation.time / this.state.animation.total) * -shifty,
+        (this.state.animation.time / this.state.animation.total) * -shiftX,
+        (this.state.animation.time / this.state.animation.total) * -shiftY,
       );
       const col2 =
         this.tileColors[
           this.config.tile.data[this.currentMove.column2][this.currentMove.row2].type
         ];
 
-      this.drawTile(coord1.tilex, coord1.tiley, 0, 0, 0);
-      this.drawTile(coord2.tilex, coord2.tiley, 0, 0, 0);
+      this.drawTile(coord1.x, coord1.y, 0, 0, 0);
+      this.drawTile(coord2.x, coord2.y, 0, 0, 0);
 
       if (this.state.animation.state === 2) {
-        this.drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
-        this.drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
+        this.drawTile(coord1shift.x, coord1shift.y, col1[0], col1[1], col1[2]);
+        this.drawTile(coord2shift.x, coord2shift.y, col2[0], col2[1], col2[2]);
       } else {
-        this.drawTile(coord2shift.tilex, coord2shift.tiley, col2[0], col2[1], col2[2]);
-        this.drawTile(coord1shift.tilex, coord1shift.tiley, col1[0], col1[1], col1[2]);
+        this.drawTile(coord2shift.x, coord2shift.y, col2[0], col2[1], col2[2]);
+        this.drawTile(coord1shift.x, coord1shift.y, col1[0], col1[1], col1[2]);
       }
     }
   }
@@ -336,12 +336,12 @@ export default class Match3Game {
   private getTileCoordinate(
     column: number,
     row: number,
-    columnoffset: number,
-    rowoffset: number,
+    columnOffset: number,
+    rowOffset: number,
   ): TileCoordinate {
-    const tilex = this.config.x + (column + columnoffset) * this.config.tile.width;
-    const tiley = this.config.y + (row + rowoffset) * this.config.tile.height;
-    return { tilex, tiley };
+    const x = this.config.x + (column + columnOffset) * this.config.tile.width;
+    const y = this.config.y + (row + rowOffset) * this.config.tile.height;
+    return { x, y };
   }
 
   private drawTile(x: number, y: number, r: number, g: number, b: number): void {
@@ -356,16 +356,16 @@ export default class Match3Game {
       if (cluster.horizontal) {
         this.context.fillStyle = '#00ff00';
         this.context.fillRect(
-          coord.tilex + this.config.tile.width / 2,
-          coord.tiley + this.config.tile.height / 2 - 4,
+          coord.x + this.config.tile.width / 2,
+          coord.y + this.config.tile.height / 2 - 4,
           (cluster.length - 1) * this.config.tile.width,
           8,
         );
       } else {
         this.context.fillStyle = '#0000ff';
         this.context.fillRect(
-          coord.tilex + this.config.tile.width / 2 - 4,
-          coord.tiley + this.config.tile.height / 2,
+          coord.x + this.config.tile.width / 2 - 4,
+          coord.y + this.config.tile.height / 2,
           8,
           (cluster.length - 1) * this.config.tile.height,
         );
@@ -381,12 +381,12 @@ export default class Match3Game {
       this.context.strokeStyle = '#ff0000';
       this.context.beginPath();
       this.context.moveTo(
-        coord1.tilex + this.config.tile.width / 2,
-        coord1.tiley + this.config.tile.height / 2,
+        coord1.x + this.config.tile.width / 2,
+        coord1.y + this.config.tile.height / 2,
       );
       this.context.lineTo(
-        coord2.tilex + this.config.tile.width / 2,
-        coord2.tiley + this.config.tile.height / 2,
+        coord2.x + this.config.tile.width / 2,
+        coord2.y + this.config.tile.height / 2,
       );
       this.context.stroke();
     }
@@ -439,66 +439,66 @@ export default class Match3Game {
 
     // Find horizontal clusters
     for (let j = 0; j < this.config.rows; j++) {
-      let matchlength = 1;
+      let matchLength = 1;
       for (let i = 0; i < this.config.columns; i++) {
-        let checkcluster = false;
+        let checkCluster = false;
 
         if (i === this.config.columns - 1) {
-          checkcluster = true;
+          checkCluster = true;
         } else {
           if (
             this.config.tile.data[i][j].type === this.config.tile.data[i + 1][j].type &&
             this.config.tile.data[i][j].type !== -1
           ) {
-            matchlength += 1;
+            matchLength += 1;
           } else {
-            checkcluster = true;
+            checkCluster = true;
           }
         }
 
-        if (checkcluster) {
-          if (matchlength >= 3) {
+        if (checkCluster) {
+          if (matchLength >= 3) {
             this.clusters.push({
-              column: i + 1 - matchlength,
+              column: i + 1 - matchLength,
               row: j,
-              length: matchlength,
+              length: matchLength,
               horizontal: true,
             });
           }
-          matchlength = 1;
+          matchLength = 1;
         }
       }
     }
 
     // Find vertical clusters
     for (let i = 0; i < this.config.columns; i++) {
-      let matchlength = 1;
+      let matchLength = 1;
       for (let j = 0; j < this.config.rows; j++) {
-        let checkcluster = false;
+        let checkCluster = false;
 
         if (j === this.config.rows - 1) {
-          checkcluster = true;
+          checkCluster = true;
         } else {
           if (
             this.config.tile.data[i][j].type === this.config.tile.data[i][j + 1].type &&
             this.config.tile.data[i][j].type !== -1
           ) {
-            matchlength += 1;
+            matchLength += 1;
           } else {
-            checkcluster = true;
+            checkCluster = true;
           }
         }
 
-        if (checkcluster) {
-          if (matchlength >= 3) {
+        if (checkCluster) {
+          if (matchLength >= 3) {
             this.clusters.push({
               column: i,
-              row: j + 1 - matchlength,
-              length: matchlength,
+              row: j + 1 - matchLength,
+              length: matchLength,
               horizontal: false,
             });
           }
-          matchlength = 1;
+          matchLength = 1;
         }
       }
     }
@@ -541,15 +541,15 @@ export default class Match3Game {
   ): void {
     for (let i = 0; i < this.clusters.length; i++) {
       const cluster = this.clusters[i];
-      let coffset = 0;
-      let roffset = 0;
+      let colOffset = 0;
+      let rowOffset = 0;
       for (let j = 0; j < cluster.length; j++) {
-        func(i, cluster.column + coffset, cluster.row + roffset, cluster);
+        func(i, cluster.column + colOffset, cluster.row + rowOffset, cluster);
 
         if (cluster.horizontal) {
-          coffset++;
+          colOffset++;
         } else {
-          roffset++;
+          rowOffset++;
         }
       }
     }
@@ -610,9 +610,9 @@ export default class Match3Game {
   }
 
   private swap(x1: number, y1: number, x2: number, y2: number): void {
-    const typeswap = this.config.tile.data[x1][y1].type;
+    const type = this.config.tile.data[x1][y1].type;
     this.config.tile.data[x1][y1].type = this.config.tile.data[x2][y2].type;
-    this.config.tile.data[x2][y2].type = typeswap;
+    this.config.tile.data[x2][y2].type = type;
   }
 
   private mouseSwap(c1: number, r1: number, c2: number, r2: number): void {

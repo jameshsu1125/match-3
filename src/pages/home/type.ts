@@ -10,8 +10,8 @@ export interface Position {
 }
 
 export interface TileCoordinate {
-  tilex: number;
-  tiley: number;
+  x: number;
+  y: number;
 }
 
 export interface MouseTileResult {
