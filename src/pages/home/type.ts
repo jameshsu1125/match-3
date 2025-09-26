@@ -26,15 +26,13 @@ export interface SelectedTile {
   row: number;
 }
 
-export interface Level {
+export interface TConfig {
   x: number;
   y: number;
   columns: number;
   rows: number;
-  tilewidth: number;
-  tileheight: number;
-  tiles: Tile[][];
-  selectedtile: SelectedTile;
+  tile: { width: number; height: number; data: Tile[][] };
+  selected: SelectedTile;
 }
 
 export interface Cluster {
@@ -63,4 +61,21 @@ export enum GameState {
   INIT = 0,
   READY = 1,
   RESOLVE = 2,
+  GAME_OVER = 3,
 }
+
+export type TState = {
+  isDrag: boolean;
+  status: GameState;
+  time: {
+    lastFrame: number;
+    fpsTime: number;
+    fps: number;
+    count: number;
+  };
+  animation: {
+    state: 0 | 1 | 2 | 3;
+    time: number;
+    total: number;
+  };
+};
