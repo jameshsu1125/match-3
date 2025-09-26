@@ -49,14 +49,6 @@ export interface Move {
   row2: number;
 }
 
-export interface Button {
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  text: string;
-}
-
 export enum GameState {
   INIT = 0,
   READY = 1,

@@ -1,5 +1,4 @@
 import {
-  Button,
   Cluster,
   GameState,
   TConfig,
@@ -17,8 +16,8 @@ export default class Match3Game {
 
   // Level configuration
   private config: TConfig = {
-    x: 250,
-    y: 113,
+    x: 0,
+    y: 0,
     columns: 8,
     rows: 8,
     tile: {
@@ -65,13 +64,6 @@ export default class Match3Game {
   private showMoves: boolean = false;
   private aiBot: boolean = false;
   private gameOver: boolean = false;
-
-  // GUI buttons
-  private buttons: Button[] = [
-    { x: 30, y: 240, width: 150, height: 50, text: 'New Game' },
-    { x: 30, y: 300, width: 150, height: 50, text: 'Show Moves' },
-    { x: 30, y: 360, width: 150, height: 50, text: 'Enable AI Bot' },
-  ];
 
   constructor(canvasId: string) {
     const canvas = document.getElementById(canvasId) as HTMLCanvasElement;
@@ -229,12 +221,6 @@ export default class Match3Game {
   }
 
   private render(): void {
-    // Draw score
-    this.context.fillStyle = '#000000';
-    this.context.font = '24px Verdana';
-    this.drawCenterText('Score:', 30, this.config.y + 40, 150);
-    this.drawCenterText(this.score.toString(), 30, this.config.y + 70, 150);
-
     // Draw level background
     const levelWidth = this.config.columns * this.config.tile.width;
     const levelHeight = this.config.rows * this.config.tile.height;
