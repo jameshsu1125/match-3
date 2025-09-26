@@ -60,7 +60,7 @@ export type TState = {
   isDrag: boolean;
   status: GameState;
   time: {
-    lastFrame: number;
+    last: number;
     fpsTime: number;
     fps: number;
     count: number;

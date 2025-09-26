@@ -32,7 +32,7 @@ export default class Match3Game {
     isDrag: false,
     status: GameState.INIT,
     time: {
-      lastFrame: 0,
+      last: 0,
       fpsTime: 0,
       fps: 0,
       count: 0,
@@ -110,8 +110,8 @@ export default class Match3Game {
   };
 
   private update(delta: number): void {
-    const dt = (delta - this.state.time.lastFrame) / 1000;
-    this.state.time.lastFrame = delta;
+    const dt = (delta - this.state.time.last) / 1000;
+    this.state.time.last = delta;
 
     this.updateFps(dt);
 
